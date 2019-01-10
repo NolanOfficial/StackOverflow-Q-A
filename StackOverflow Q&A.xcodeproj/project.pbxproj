@@ -8,20 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		6ACDA06421E57013008B4F74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA06321E57013008B4F74 /* AppDelegate.swift */; };
-		6ACDA06621E57013008B4F74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA06521E57013008B4F74 /* ViewController.swift */; };
 		6ACDA06921E57013008B4F74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ACDA06721E57013008B4F74 /* Main.storyboard */; };
 		6ACDA06B21E57014008B4F74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ACDA06A21E57014008B4F74 /* Assets.xcassets */; };
 		6ACDA06E21E57014008B4F74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ACDA06C21E57014008B4F74 /* LaunchScreen.storyboard */; };
+		6ACDA07621E58DF1008B4F74 /* QuestionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA07521E58DF1008B4F74 /* QuestionsController.swift */; };
+		6ACDA07A21E5A877008B4F74 /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA07921E5A877008B4F74 /* QuestionData.swift */; };
+		6ACDA07C21E5BA84008B4F74 /* QuestionsDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA07B21E5BA84008B4F74 /* QuestionsDisplayCell.swift */; };
+		6ACDA08221E5ED7F008B4F74 /* AnswersDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA08121E5ED7F008B4F74 /* AnswersDisplayCell.swift */; };
+		6ACDA08421E5EE98008B4F74 /* AnswersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA08321E5EE98008B4F74 /* AnswersController.swift */; };
+		6ACDA08621E67AB4008B4F74 /* 765-default-avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACDA08521E67AB4008B4F74 /* 765-default-avatar.png */; };
+		6ACDA08821E6A59F008B4F74 /* OtherAnswersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA08721E6A59F008B4F74 /* OtherAnswersCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6ACDA06021E57013008B4F74 /* StackOverflow Q&A.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StackOverflow Q&A.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACDA06321E57013008B4F74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6ACDA06521E57013008B4F74 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6ACDA06821E57013008B4F74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6ACDA06A21E57014008B4F74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6ACDA06D21E57014008B4F74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6ACDA06F21E57014008B4F74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6ACDA07521E58DF1008B4F74 /* QuestionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsController.swift; sourceTree = "<group>"; };
+		6ACDA07921E5A877008B4F74 /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
+		6ACDA07B21E5BA84008B4F74 /* QuestionsDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsDisplayCell.swift; sourceTree = "<group>"; };
+		6ACDA08121E5ED7F008B4F74 /* AnswersDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersDisplayCell.swift; sourceTree = "<group>"; };
+		6ACDA08321E5EE98008B4F74 /* AnswersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersController.swift; sourceTree = "<group>"; };
+		6ACDA08521E67AB4008B4F74 /* 765-default-avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "765-default-avatar.png"; sourceTree = "<group>"; };
+		6ACDA08721E6A59F008B4F74 /* OtherAnswersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherAnswersCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				6ACDA06221E57013008B4F74 /* StackOverflow Q&A */,
+				6ACDA06F21E57014008B4F74 /* Info.plist */,
 				6ACDA06121E57013008B4F74 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,14 +67,51 @@
 		6ACDA06221E57013008B4F74 /* StackOverflow Q&A */ = {
 			isa = PBXGroup;
 			children = (
-				6ACDA06321E57013008B4F74 /* AppDelegate.swift */,
-				6ACDA06521E57013008B4F74 /* ViewController.swift */,
-				6ACDA06721E57013008B4F74 /* Main.storyboard */,
-				6ACDA06A21E57014008B4F74 /* Assets.xcassets */,
-				6ACDA06C21E57014008B4F74 /* LaunchScreen.storyboard */,
-				6ACDA06F21E57014008B4F74 /* Info.plist */,
+				6ACDA07D21E5BA91008B4F74 /* Model */,
+				6ACDA07E21E5BA98008B4F74 /* View */,
+				6ACDA07F21E5BA9C008B4F74 /* Controllers */,
+				6ACDA08021E5BAD4008B4F74 /* Other */,
 			);
 			path = "StackOverflow Q&A";
+			sourceTree = "<group>";
+		};
+		6ACDA07D21E5BA91008B4F74 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6ACDA07921E5A877008B4F74 /* QuestionData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6ACDA07E21E5BA98008B4F74 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6ACDA07B21E5BA84008B4F74 /* QuestionsDisplayCell.swift */,
+				6ACDA08121E5ED7F008B4F74 /* AnswersDisplayCell.swift */,
+				6ACDA08721E6A59F008B4F74 /* OtherAnswersCell.swift */,
+				6ACDA06721E57013008B4F74 /* Main.storyboard */,
+				6ACDA06C21E57014008B4F74 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6ACDA07F21E5BA9C008B4F74 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6ACDA06321E57013008B4F74 /* AppDelegate.swift */,
+				6ACDA07521E58DF1008B4F74 /* QuestionsController.swift */,
+				6ACDA08321E5EE98008B4F74 /* AnswersController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6ACDA08021E5BAD4008B4F74 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				6ACDA06A21E57014008B4F74 /* Assets.xcassets */,
+				6ACDA08521E67AB4008B4F74 /* 765-default-avatar.png */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ACDA06E21E57014008B4F74 /* LaunchScreen.storyboard in Resources */,
+				6ACDA08621E67AB4008B4F74 /* 765-default-avatar.png in Resources */,
 				6ACDA06B21E57014008B4F74 /* Assets.xcassets in Resources */,
 				6ACDA06921E57013008B4F74 /* Main.storyboard in Resources */,
 			);
@@ -135,8 +186,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ACDA06621E57013008B4F74 /* ViewController.swift in Sources */,
+				6ACDA08221E5ED7F008B4F74 /* AnswersDisplayCell.swift in Sources */,
+				6ACDA07C21E5BA84008B4F74 /* QuestionsDisplayCell.swift in Sources */,
+				6ACDA07621E58DF1008B4F74 /* QuestionsController.swift in Sources */,
+				6ACDA08421E5EE98008B4F74 /* AnswersController.swift in Sources */,
 				6ACDA06421E57013008B4F74 /* AppDelegate.swift in Sources */,
+				6ACDA08821E6A59F008B4F74 /* OtherAnswersCell.swift in Sources */,
+				6ACDA07A21E5A877008B4F74 /* QuestionData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +340,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J9S8P7XX49;
-				INFOPLIST_FILE = "StackOverflow Q&A/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -292,7 +348,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NolanFuchs.StackOverflow-Q-A";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -302,7 +358,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J9S8P7XX49;
-				INFOPLIST_FILE = "StackOverflow Q&A/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +366,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NolanFuchs.StackOverflow-Q-A";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

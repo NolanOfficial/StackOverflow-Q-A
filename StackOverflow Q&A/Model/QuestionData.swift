@@ -68,18 +68,12 @@ struct AnswersOwner: Decodable {
     //    let link: String?
 }
 
+
 class BodyQuestionData: Decodable {
     let items: [moreTags]?
 }
 
 struct moreTags: Decodable {
-   
-    let owner: OriginalOwner?
     let body_markdown : String?
-}
-
-struct OriginalOwner: Decodable {
-    let body_markdown : String?
-
 }
 

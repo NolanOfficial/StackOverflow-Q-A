@@ -16,11 +16,14 @@
 		6ACDA07C21E5BA84008B4F74 /* QuestionsDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA07B21E5BA84008B4F74 /* QuestionsDisplayCell.swift */; };
 		6ACDA08221E5ED7F008B4F74 /* AnswersDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA08121E5ED7F008B4F74 /* AnswersDisplayCell.swift */; };
 		6ACDA08421E5EE98008B4F74 /* AnswersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA08321E5EE98008B4F74 /* AnswersController.swift */; };
-		6ACDA08621E67AB4008B4F74 /* 765-default-avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACDA08521E67AB4008B4F74 /* 765-default-avatar.png */; };
+		6ACDA08621E67AB4008B4F74 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACDA08521E67AB4008B4F74 /* default.png */; };
 		6ACDA08821E6A59F008B4F74 /* OtherAnswersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACDA08721E6A59F008B4F74 /* OtherAnswersCell.swift */; };
+		7AD6ABD46A8EEB1D6CFDA881 /* Pods_StackOverflow_Q_A.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A716A48EB5CD88ED1735D7 /* Pods_StackOverflow_Q_A.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		395E76FC8C01BECD7516AAB8 /* Pods-StackOverflow Q&A.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflow Q&A.release.xcconfig"; path = "Target Support Files/Pods-StackOverflow Q&A/Pods-StackOverflow Q&A.release.xcconfig"; sourceTree = "<group>"; };
+		5B93C1549D39075AE27B66FB /* Pods-StackOverflow Q&A.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflow Q&A.debug.xcconfig"; path = "Target Support Files/Pods-StackOverflow Q&A/Pods-StackOverflow Q&A.debug.xcconfig"; sourceTree = "<group>"; };
 		6ACDA06021E57013008B4F74 /* StackOverflow Q&A.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StackOverflow Q&A.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACDA06321E57013008B4F74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6ACDA06821E57013008B4F74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -32,8 +35,9 @@
 		6ACDA07B21E5BA84008B4F74 /* QuestionsDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsDisplayCell.swift; sourceTree = "<group>"; };
 		6ACDA08121E5ED7F008B4F74 /* AnswersDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersDisplayCell.swift; sourceTree = "<group>"; };
 		6ACDA08321E5EE98008B4F74 /* AnswersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersController.swift; sourceTree = "<group>"; };
-		6ACDA08521E67AB4008B4F74 /* 765-default-avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "765-default-avatar.png"; sourceTree = "<group>"; };
+		6ACDA08521E67AB4008B4F74 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		6ACDA08721E6A59F008B4F74 /* OtherAnswersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherAnswersCell.swift; sourceTree = "<group>"; };
+		A5A716A48EB5CD88ED1735D7 /* Pods_StackOverflow_Q_A.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StackOverflow_Q_A.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,18 +45,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AD6ABD46A8EEB1D6CFDA881 /* Pods_StackOverflow_Q_A.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D207AEFC2BE45794E265943 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B93C1549D39075AE27B66FB /* Pods-StackOverflow Q&A.debug.xcconfig */,
+				395E76FC8C01BECD7516AAB8 /* Pods-StackOverflow Q&A.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6ACDA05721E57013008B4F74 = {
 			isa = PBXGroup;
 			children = (
 				6ACDA06221E57013008B4F74 /* StackOverflow Q&A */,
 				6ACDA06F21E57014008B4F74 /* Info.plist */,
 				6ACDA06121E57013008B4F74 /* Products */,
+				5D207AEFC2BE45794E265943 /* Pods */,
+				C8C7FF89ECD1FECAE947073A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,9 +125,17 @@
 			isa = PBXGroup;
 			children = (
 				6ACDA06A21E57014008B4F74 /* Assets.xcassets */,
-				6ACDA08521E67AB4008B4F74 /* 765-default-avatar.png */,
+				6ACDA08521E67AB4008B4F74 /* default.png */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		C8C7FF89ECD1FECAE947073A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5A716A48EB5CD88ED1735D7 /* Pods_StackOverflow_Q_A.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,9 +145,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6ACDA07221E57014008B4F74 /* Build configuration list for PBXNativeTarget "StackOverflow Q&A" */;
 			buildPhases = (
+				A2E684ED77CC77B2E1DE798D /* [CP] Check Pods Manifest.lock */,
 				6ACDA05C21E57013008B4F74 /* Sources */,
 				6ACDA05D21E57013008B4F74 /* Frameworks */,
 				6ACDA05E21E57013008B4F74 /* Resources */,
+				493BD247A9C5CD69A05E72D7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,13 +199,60 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ACDA06E21E57014008B4F74 /* LaunchScreen.storyboard in Resources */,
-				6ACDA08621E67AB4008B4F74 /* 765-default-avatar.png in Resources */,
+				6ACDA08621E67AB4008B4F74 /* default.png in Resources */,
 				6ACDA06B21E57014008B4F74 /* Assets.xcassets in Resources */,
 				6ACDA06921E57013008B4F74 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		493BD247A9C5CD69A05E72D7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StackOverflow Q&A/Pods-StackOverflow Q&A-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StackOverflow Q&A/Pods-StackOverflow Q&A-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2E684ED77CC77B2E1DE798D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StackOverflow Q&A-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6ACDA05C21E57013008B4F74 /* Sources */ = {
@@ -336,6 +409,7 @@
 		};
 		6ACDA07321E57014008B4F74 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B93C1549D39075AE27B66FB /* Pods-StackOverflow Q&A.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -354,6 +428,7 @@
 		};
 		6ACDA07421E57014008B4F74 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 395E76FC8C01BECD7516AAB8 /* Pods-StackOverflow Q&A.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -39,9 +39,9 @@
                         <color key="backgroundColor" red="0.12424248039999999" green="0.13706610599999999" blue="0.15954156089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Bgw-My-uai" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5Of-sc-c4v"/>
-                            <constraint firstItem="Bgw-My-uai" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OLu-KX-oXS"/>
+                            <constraint firstItem="Bgw-My-uai" firstAttribute="centerX" secondItem="X9q-It-ug2" secondAttribute="centerX" id="OLu-KX-oXS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="X9q-It-ug2"/>
                     </view>
                     <navigationItem key="navigationItem" id="6ds-aN-L9N"/>
                 </viewController>

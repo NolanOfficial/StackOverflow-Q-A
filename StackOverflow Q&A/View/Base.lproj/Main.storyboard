@@ -29,7 +29,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="99.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="765-default-avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="6qT-4D-MvF">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default.png" translatesAutoresizingMaskIntoConstraints="NO" id="6qT-4D-MvF">
                                                     <rect key="frame" x="20" y="12" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="75" id="0zC-PN-twM"/>
@@ -131,7 +131,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="99.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="765-default-avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="39x-aR-AfA">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default.png" translatesAutoresizingMaskIntoConstraints="NO" id="39x-aR-AfA">
                                                     <rect key="frame" x="20" y="12" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="75" id="H6w-yR-AXd"/>
@@ -198,35 +198,55 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading question link..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="EXp-bn-DIh">
-                                                    <rect key="frame" x="20" y="11" width="374" height="178"/>
+                                                    <rect key="frame" x="20" y="33" width="374" height="156"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="374" id="AdH-lB-KX3"/>
-                                                        <constraint firstAttribute="height" constant="178" id="a8w-9h-b6P"/>
+                                                        <constraint firstAttribute="width" constant="374" id="0Ql-AK-wBh"/>
+                                                        <constraint firstAttribute="height" constant="156" id="5aQ-e1-afK"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original Question:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWG-ma-i6m">
+                                                    <rect key="frame" x="20" y="11" width="120" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="F2Y-SJ-OZU"/>
+                                                        <constraint firstAttribute="width" constant="120" id="Og8-Bb-IFM"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="EXp-bn-DIh" firstAttribute="trailing" secondItem="y12-e7-Ky0" secondAttribute="trailingMargin" id="IaS-GR-RLY"/>
-                                                <constraint firstItem="EXp-bn-DIh" firstAttribute="leading" secondItem="y12-e7-Ky0" secondAttribute="leadingMargin" id="ciL-jY-UIy"/>
-                                                <constraint firstItem="EXp-bn-DIh" firstAttribute="top" secondItem="y12-e7-Ky0" secondAttribute="topMargin" id="mff-WK-aNz"/>
-                                                <constraint firstItem="EXp-bn-DIh" firstAttribute="bottom" secondItem="y12-e7-Ky0" secondAttribute="bottomMargin" id="pHm-6h-Cuf"/>
+                                                <constraint firstItem="OWG-ma-i6m" firstAttribute="leading" secondItem="y12-e7-Ky0" secondAttribute="leadingMargin" id="4bW-LE-yF0"/>
+                                                <constraint firstItem="OWG-ma-i6m" firstAttribute="top" secondItem="y12-e7-Ky0" secondAttribute="topMargin" id="BL8-TZ-78a"/>
+                                                <constraint firstItem="EXp-bn-DIh" firstAttribute="bottom" secondItem="y12-e7-Ky0" secondAttribute="bottomMargin" id="MWf-Mn-wHQ"/>
+                                                <constraint firstItem="EXp-bn-DIh" firstAttribute="trailing" secondItem="y12-e7-Ky0" secondAttribute="trailingMargin" id="WeL-GN-JAu"/>
+                                                <constraint firstItem="EXp-bn-DIh" firstAttribute="leading" secondItem="y12-e7-Ky0" secondAttribute="leadingMargin" id="m6e-hf-wps"/>
+                                                <constraint firstItem="EXp-bn-DIh" firstAttribute="top" secondItem="OWG-ma-i6m" secondAttribute="bottom" constant="5" id="qv0-WT-Gy6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="answerBody" destination="EXp-bn-DIh" id="mQJ-ec-8fm"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="answerTitle" rowHeight="50" id="zHz-SD-Os4" customClass="OtherAnswersCell" customModule="StackOverflow_Q_A" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="328" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zHz-SD-Os4" id="vsz-cl-dxU">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="otherAnswers" rowHeight="200" id="veH-Jo-ZJT" customClass="OtherAnswersCell" customModule="StackOverflow_Q_A" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="328" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="378" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="veH-Jo-ZJT" id="368-kX-2z5">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="199.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="765-default-avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="kuZ-Vc-blq">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default.png" translatesAutoresizingMaskIntoConstraints="NO" id="kuZ-Vc-blq">
                                                     <rect key="frame" x="20" y="12" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="75" id="5V8-sP-Y1v"/>
@@ -316,7 +336,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="765-default-avatar.png" width="530" height="530"/>
+        <image name="default.png" width="530" height="530"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AnswersController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-     
-    // Data from the previous segued destination
+
+    // Data from the previous segued destination + new instances
     var continueData = [QuestionsData]()
     var answerData = [AnswersData]()
     var bodyData = [BodyQuestionData]()
@@ -21,8 +22,9 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     var link: String = ""
     var questionID: Int = 0
     var answerBody: String = ""
+    var jsonCount: Int? = 0 
     
-    
+    // UITableView
     @IBOutlet weak var answersDataTable: UITableView!
     
     override func viewDidLoad() {
@@ -38,7 +40,41 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
         guard let url = URL(string: answerJsonLink) else { return }
         guard let urlBodyQuestion = URL(string: bodyQuestion) else { return }
         
-        // Deriving data for the answers of the corresponding question
+        // JSON Call Methods
+        jsonAnswersDownload(url)
+       jsonBodyQuestionDownload(urlBodyQuestion)
+        
+        
+    }
+    
+    // Deriving data for the paticular question
+    fileprivate func jsonBodyQuestionDownload(_ urlBodyQuestion: URL) {
+        // Deriving Data for the Body of the Question
+        URLSession.shared.dataTask(with: urlBodyQuestion) { (data, response, err) in
+            if err != nil {
+                print(err ?? "Error with URL Session")
+            } else {
+                guard let data = data else { return }
+                
+                do {
+                    
+                    let myData = try JSONDecoder().decode(BodyQuestionData.self, from: data)
+                    self.bodyData = [myData]
+                    self.jsonCount = self.bodyData[0].items?.count
+                    // Waits for data to be stored before loading all data
+                    DispatchQueue.main.async {
+                        self.answersDataTable.reloadData()
+                    }
+                } catch let jsonErr {
+                    print(jsonErr)
+                }
+            }
+            }.resume()
+    }
+    
+      // Deriving data for the answers of the corresponding question
+    // Could not turn into a single JSON function because .decode() requires a Decode.Protocol and calling a direct class does not conform to that instance, only to Class: Decodable
+    fileprivate func jsonAnswersDownload(_ url: URL) {
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             if err != nil {
                 print(err ?? "Error with URL Session")
@@ -58,30 +94,8 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
                 }
             }
             }.resume()
-        
-        // Deriving Data for the Body of the Question
-        URLSession.shared.dataTask(with: urlBodyQuestion) { (data, response, err) in
-            if err != nil {
-                print(err ?? "Error with URL Session")
-            } else {
-                guard let data = data else { return }
-                
-                do {
-                    
-                    let myData = try JSONDecoder().decode(BodyQuestionData.self, from: data)
-                    self.bodyData = [myData]
-                    // Waits for data to be stored before loading all data
-                    DispatchQueue.main.async {
-                        self.answersDataTable.reloadData()
-                    }
-                } catch let jsonErr {
-                    print(jsonErr)
-                }
-            }
-            }.resume()
-        
     }
-  
+
     
     func openUrl() {
         if let url = URL(string: link) {
@@ -91,46 +105,59 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // All answers + question + previous display
-       return answers! + 2
+       return answers! + 3
     }
     
     
+    // Individiual Cells for the Table View
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // Previous Question Cell
         if indexPath.row == 0 {
         let cell = answersDataTable.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) as! QuestionsDisplayCell
         
         cell.questionOwnerName?.text = currentOwner
         cell.questionTitle?.text = currentQuestionTitle
         cell.questionNumberOfAnswers?.text = "# of Answers: \(answers!)"
+        cell.questionProfilePicture?.layer.cornerRadius = 20
+        cell.questionProfilePicture?.clipsToBounds = true
         cell.questionProfilePicture?.image = currentProfileImage
+        
         return cell
         }
             
+        // Clickable Full Question Cell
         else if indexPath.row == 1 {
-            let cell1 = answersDataTable.dequeueReusableCell(withIdentifier: "answerCell", for: indexPath) as! AnswersDisplayCell
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            cell1.answerBody.text = self.bodyData[0].items?[0].body_markdown                
-        }
+             let cell1 = answersDataTable.dequeueReusableCell(withIdentifier: "answerCell", for: indexPath) as! AnswersDisplayCell
+            if jsonCount ?? 0 < 1 {
             return cell1
+            } else {
+                cell1.answerBody.text = self.bodyData[0].items?[0].body_markdown
+                return cell1
+            }
         }
-        
+        // Answer Label Cell
+        else if indexPath.row == 2 {
+            let defaultCell = answersDataTable.dequeueReusableCell(withIdentifier: "answerTitle")
+            defaultCell?.textLabel?.text = "Answers:"
+            return defaultCell!
+        }
+          
+        // Answers to corresponding question cell(s)
         else {
             let cell2 = answersDataTable.dequeueReusableCell(withIdentifier: "otherAnswers", for: indexPath) as! OtherAnswersCell
-           
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                
-            cell2.answerName?.text = self.answerData[0].items?[indexPath.row - 2].owner?.display_name
-            cell2.answerText?.text = self.answerData[0].items?[indexPath.row - 2].body_markdown
-                    
-            let url = URL(string: (self.answerData[0].items?[indexPath.row-2].owner?.profile_image ?? "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"))
-            let data = try? Data(contentsOf: url!)
-            if let imageData = data {
-            cell2.answerProfilePicture?.image = UIImage(data: imageData) ?? UIImage(named: "765-default-avatar.png")
-                    }
-            }
-            
+            if jsonCount ?? 0 < 1 {
             return cell2
+            }
+            else {
+                cell2.answerName?.text = self.answerData[0].items?[indexPath.row - 3].owner?.display_name
+                cell2.answerText?.text = self.answerData[0].items?[indexPath.row - 3].body_markdown
+                
+                // Downloading picture data from the API + optional default picture calls
+                let url = URL(string: (self.answerData[0].items?[indexPath.row-3].owner?.profile_image ?? "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"))
+                self.cacheImage(imageView: &cell2.answerProfilePicture!, url: url!)
+                return cell2
+            }
         }
     }
     
@@ -138,6 +165,30 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
         if indexPath.row == 1 {
             openUrl()
         } 
+    }
+    
+    func cacheImage(imageView: inout UIImageView, url: URL) {
+        let processor = DownsamplingImageProcessor(size: (imageView.frame.size))
+            >> RoundCornerImageProcessor(cornerRadius: 20)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "default.png"),
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+        {
+            result in
+            switch result {
+            case .success(let value):
+                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+            case .failure(let error):
+                print("Job failed: \(error.localizedDescription)")
+            }
+        }
     }
     
     

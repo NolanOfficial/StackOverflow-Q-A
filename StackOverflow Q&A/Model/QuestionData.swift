@@ -47,12 +47,12 @@ class AnswersData: Decodable {
 struct AnswersInfo: Decodable {
     
     let owner: AnswersOwner?
-    let is_accepted: Bool?
-    let score: Int?
-    let last_activity_date: Int?
-    let last_edit_date: Int?
-    let creation_date: Int?
-    let answer_id: Int?
+//    let is_accepted: Bool?
+//    let score: Int?
+//    let last_activity_date: Int?
+//    let last_edit_date: Int?
+//    let creation_date: Int?
+//    let answer_id: Int?
     let question_id: Int?
     let body_markdown: String?
     

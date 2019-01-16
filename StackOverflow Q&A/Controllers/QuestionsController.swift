@@ -19,6 +19,7 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
     let jsonURL = "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=swift&site=stackoverflow"
     var arrayCount: Int? = 1
     var fetchingMore = false
+    let network = Network()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,9 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
     // Downloads data from the given url and stores it within an Array
     fileprivate func downloadURL() {
         guard let url = URL(string: jsonURL) else { return }
-        urlStartSession(url: url) { (data) in
+    
+        
+        network.urlStartSession(url: url) { (data) in
             do {
                 let myData = try JSONDecoder().decode(QuestionsData.self, from: data)
                 
@@ -154,18 +157,5 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
 
 }
 
-extension QuestionsController {
-    
-    func urlStartSession(url: URL, completion: @escaping (Data) -> Void) {
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            if err != nil {
-                print(err ?? "Error with URL Session")
-            } else {
-                guard let data = data else { return }
-                completion(data)
-            }
-        }.resume()
-    }
-}
 
 

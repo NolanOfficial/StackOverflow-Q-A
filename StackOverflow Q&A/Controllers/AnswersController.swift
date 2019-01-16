@@ -11,10 +11,13 @@ import Kingfisher
 
 class AnswersController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    // Data from the previous segued destination + new instances
+    // Data and classes
     var continueData = [QuestionsData]()
     var answerData = [AnswersData]()
     var bodyData = [BodyQuestionData]()
+    let network = Network()
+   
+    // Destination Variables
     var answers: Int? = 0
     var currentQuestionTitle: String = ""
     var currentOwner: String = ""
@@ -23,6 +26,8 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     var questionID: Int = 0
     var answerBody: String = ""
     var jsonCount: Int? = 0
+    
+    // Json Link Variables
     var answerJsonLink = ""
     var bodyQuestion = ""
     
@@ -50,7 +55,7 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     fileprivate func jsonBodyQuestionDownload() {
         // Deriving Data for the Body of the Question
         guard let urlBodyQuestion = URL(string: bodyQuestion) else { return }
-        urlStartSession(url: urlBodyQuestion) { (data) in
+        network.urlStartSession(url: urlBodyQuestion) { (data) in
             do {
                 let myData = try JSONDecoder().decode(BodyQuestionData.self, from: data)
                 self.bodyData = [myData]
@@ -68,9 +73,8 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
       // Deriving data for the answers of the corresponding question
     fileprivate func jsonAnswersDownload() {
         guard let url = URL(string: answerJsonLink) else { return }
-        urlStartSession(url: url) { (data) in
+        network.urlStartSession(url: url) { (data) in
             do {
-                
                 let myData = try JSONDecoder().decode(AnswersData.self, from: data)
                 self.answerData = [myData]
                 // Waits for data to be stored before loading all data
@@ -179,15 +183,3 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     }
 }
 
-extension AnswersController {
-        func urlStartSession(url: URL, completion: @escaping (Data) -> Void) {
-            URLSession.shared.dataTask(with: url) { (data, response, err) in
-                if err != nil {
-                    print(err ?? "Error with URL Session")
-                } else {
-                    guard let data = data else { return }
-                    completion(data)
-                }
-                }.resume()
-        }
-}

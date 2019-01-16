@@ -20,17 +20,28 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
     var arrayCount: Int? = 1
     var fetchingMore = false
     let network = Network()
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadURL()
         questionsDataTable.delegate = self
         questionsDataTable.dataSource = self
+        
+        // Table View Refresh Implementation
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        questionsDataTable.refreshControl = refreshControl
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         questionsDataTable.reloadData()
+    }
+    
+    @objc func refresh() {
+        questionsDataTable.reloadData()
+        print("Refreshing...")
+        refreshControl.endRefreshing()
     }
     
     // Downloads data from the given url and stores it within an Array

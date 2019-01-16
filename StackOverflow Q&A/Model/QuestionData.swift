@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-
+// Questions from StackOverflow 
 class QuestionsData: Decodable {
     let items: [Tags]?
 }
@@ -39,7 +39,7 @@ struct Owner: Decodable {
 }
 
 
-
+// Answers for Corresponding Question
 class AnswersData: Decodable {
     let items: [AnswersInfo]?
 }
@@ -69,6 +69,7 @@ struct AnswersOwner: Decodable {
 }
 
 
+// Body_Markdown Question
 class BodyQuestionData: Decodable {
     let items: [moreTags]?
 }

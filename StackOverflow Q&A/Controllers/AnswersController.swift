@@ -16,6 +16,7 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     var answerData = [AnswersData]()
     var bodyData = [BodyQuestionData]()
     let network = Network()
+    let refreshControl = UIRefreshControl()
    
     // Destination Variables
     var answers: Int? = 0
@@ -31,13 +32,20 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     var answerJsonLink = ""
     var bodyQuestion = ""
     
+
+    
     // UITableView
     @IBOutlet weak var answersDataTable: UITableView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Delegates 
         answersDataTable.delegate = self
         answersDataTable.dataSource = self
+        
+        
         
         // links for the body question API and answers API
         answerJsonLink = "https://api.stackexchange.com/2.2/questions/\(questionID)/answers?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wzftf"
@@ -48,8 +56,18 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
         jsonAnswersDownload()
         jsonBodyQuestionDownload()
         
-        
+        // Table View Refresh Implementation
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        answersDataTable.refreshControl = refreshControl
     }
+    
+    // Refresh Functino
+    @objc func refresh() {
+        answersDataTable.reloadData()
+        print("Refreshing...")
+        refreshControl.endRefreshing()
+    }
+    
     
     // Deriving data for the paticular question
     fileprivate func jsonBodyQuestionDownload() {

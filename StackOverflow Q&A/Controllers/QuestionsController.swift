@@ -35,30 +35,23 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
     // Downloads data from the given url and stores it within an Array
     fileprivate func downloadURL() {
         guard let url = URL(string: jsonURL) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            if err != nil {
-                print(err ?? "Error with URL Session")
-            } else {
-                guard let data = data else { return }
+        urlStartSession(url: url) { (data) in
+            do {
+                let myData = try JSONDecoder().decode(QuestionsData.self, from: data)
                 
-                do {
+                self.allData = [myData]
+                self.arrayCount = self.allData[0].items?.count
+                
+                // Waits for data to be stored before loading all data
+                DispatchQueue.main.async {
+                    self.questionsDataTable.reloadData()
                     
-                    let myData = try JSONDecoder().decode(QuestionsData.self, from: data)
-                    
-                        self.allData = [myData]
-                        self.arrayCount = self.allData[0].items?.count
-                    
-                    // Waits for data to be stored before loading all data
-                    DispatchQueue.main.async {
-                         self.questionsDataTable.reloadData()
-                       
-                    }
-                } catch let jsonErr {
-                    print(jsonErr)
-             
                 }
+            } catch let jsonErr {
+                print(jsonErr)
+                
             }
-            }.resume()
+        }
     }
     
     // Converts the status bar into a lighter shade for better visuals
@@ -159,6 +152,20 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
 
+}
+
+extension QuestionsController {
+    
+    func urlStartSession(url: URL, completion: @escaping (Data) -> Void) {
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            if err != nil {
+                print(err ?? "Error with URL Session")
+            } else {
+                guard let data = data else { return }
+                completion(data)
+            }
+        }.resume()
+    }
 }
 
 

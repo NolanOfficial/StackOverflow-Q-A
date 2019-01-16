@@ -22,7 +22,9 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     var link: String = ""
     var questionID: Int = 0
     var answerBody: String = ""
-    var jsonCount: Int? = 0 
+    var jsonCount: Int? = 0
+    var answerJsonLink = ""
+    var bodyQuestion = ""
     
     // UITableView
     @IBOutlet weak var answersDataTable: UITableView!
@@ -33,67 +35,52 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
         answersDataTable.dataSource = self
         
         // links for the body question API and answers API
-        let answerJsonLink = "https://api.stackexchange.com/2.2/questions/\(questionID)/answers?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wzftf"
-        let bodyQuestion = "https://api.stackexchange.com/2.2/questions/\(questionID)?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wwK4f"
-        
-        // turning the links into URL's
-        guard let url = URL(string: answerJsonLink) else { return }
-        guard let urlBodyQuestion = URL(string: bodyQuestion) else { return }
+        answerJsonLink = "https://api.stackexchange.com/2.2/questions/\(questionID)/answers?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wzftf"
+
+        bodyQuestion = "https://api.stackexchange.com/2.2/questions/\(questionID)?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wwK4f"
         
         // JSON Call Methods
-        jsonAnswersDownload(url)
-       jsonBodyQuestionDownload(urlBodyQuestion)
+        jsonAnswersDownload()
+        jsonBodyQuestionDownload()
         
         
     }
     
     // Deriving data for the paticular question
-    fileprivate func jsonBodyQuestionDownload(_ urlBodyQuestion: URL) {
+    fileprivate func jsonBodyQuestionDownload() {
         // Deriving Data for the Body of the Question
-        URLSession.shared.dataTask(with: urlBodyQuestion) { (data, response, err) in
-            if err != nil {
-                print(err ?? "Error with URL Session")
-            } else {
-                guard let data = data else { return }
-                
-                do {
-                    
-                    let myData = try JSONDecoder().decode(BodyQuestionData.self, from: data)
-                    self.bodyData = [myData]
-                    self.jsonCount = self.bodyData[0].items?.count
-                    // Waits for data to be stored before loading all data
-                    DispatchQueue.main.async {
-                        self.answersDataTable.reloadData()
-                    }
-                } catch let jsonErr {
-                    print(jsonErr)
+        guard let urlBodyQuestion = URL(string: bodyQuestion) else { return }
+        urlStartSession(url: urlBodyQuestion) { (data) in
+            do {
+                let myData = try JSONDecoder().decode(BodyQuestionData.self, from: data)
+                self.bodyData = [myData]
+                self.jsonCount = self.bodyData[0].items?.count
+                // Waits for data to be stored before loading all data
+                DispatchQueue.main.async {
+                    self.answersDataTable.reloadData()
                 }
+            } catch let jsonErr {
+                print(jsonErr)
             }
-            }.resume()
+        }
     }
     
       // Deriving data for the answers of the corresponding question
-    // Could not turn into a single JSON function because .decode() requires a Decode.Protocol and calling a direct class does not conform to that instance, only to Class: Decodable
-    fileprivate func jsonAnswersDownload(_ url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            if err != nil {
-                print(err ?? "Error with URL Session")
-            } else {
-                guard let data = data else { return }
+    fileprivate func jsonAnswersDownload() {
+        guard let url = URL(string: answerJsonLink) else { return }
+        urlStartSession(url: url) { (data) in
+            do {
                 
-                do {
-                    
-                    let myData = try JSONDecoder().decode(AnswersData.self, from: data)
-                    self.answerData = [myData]
-                    // Waits for data to be stored before loading all data
-                    DispatchQueue.main.async {
-                        self.answersDataTable.reloadData()
-                    }
-                } catch let jsonErr {
-                    print(jsonErr)
+                let myData = try JSONDecoder().decode(AnswersData.self, from: data)
+                self.answerData = [myData]
+                // Waits for data to be stored before loading all data
+                DispatchQueue.main.async {
+                    self.answersDataTable.reloadData()
                 }
+            } catch let jsonErr {
+                print(jsonErr)
             }
-            }.resume()
+        }
     }
 
     
@@ -190,6 +177,17 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
             }
         }
     }
-    
-    
+}
+
+extension AnswersController {
+        func urlStartSession(url: URL, completion: @escaping (Data) -> Void) {
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
+                if err != nil {
+                    print(err ?? "Error with URL Session")
+                } else {
+                    guard let data = data else { return }
+                    completion(data)
+                }
+                }.resume()
+        }
 }

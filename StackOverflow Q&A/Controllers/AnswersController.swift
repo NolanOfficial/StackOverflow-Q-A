@@ -63,9 +63,9 @@ class AnswersController: UIViewController, UITableViewDataSource, UITableViewDel
     
     // Refresh Functino
     @objc func refresh() {
+        refreshControl.endRefreshing()
         answersDataTable.reloadData()
         print("Refreshing...")
-        refreshControl.endRefreshing()
     }
     
     

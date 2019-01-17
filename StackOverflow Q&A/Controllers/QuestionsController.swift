@@ -16,11 +16,17 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Labels and constructor
     var allData = [QuestionsData]()
-    let jsonURL = "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=swift&site=stackoverflow"
+    let jsonBaseURL = "https://api.stackexchange.com/2.2/search?"
     var arrayCount: Int? = 1
+    
+    // Fetching
     var fetchingMore = false
     let network = Network()
     let refreshControl = UIRefreshControl()
+    var itemsPerBatch = 15
+    var currentRow: Int = 1
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +45,15 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func refresh() {
-        questionsDataTable.reloadData()
-        print("Refreshing...")
-        refreshControl.endRefreshing()
+            print("Refreshing...")
+            refreshControl.endRefreshing()
+            questionsDataTable.reloadData()
+        
     }
     
     // Downloads data from the given url and stores it within an Array
     fileprivate func downloadURL() {
-        guard let url = URL(string: jsonURL) else { return }
-    
-        
+        guard let url = URL(string: "\(jsonBaseURL)pagesize=\(itemsPerBatch)&order=desc&sort=activity&intitle=swift&site=stackoverflow") else { return }
         network.urlStartSession(url: url) { (data) in
             do {
                 let myData = try JSONDecoder().decode(QuestionsData.self, from: data)
@@ -159,10 +164,9 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
     func beginBatchFetch() {
         fetchingMore = true
         DispatchQueue.main.async {
-            // Where JSON call will implement
+//            self.itemsPerBatch += 10
+//            self.downloadURL()
             self.fetchingMore = false
-//          self.questionsDataTable.reloadData()
-            
         }
     }
 

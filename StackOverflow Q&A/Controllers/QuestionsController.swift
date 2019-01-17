@@ -37,6 +37,10 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
         // Table View Refresh Implementation
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         questionsDataTable.refreshControl = refreshControl
+        
+        //Loading Nib
+        let loadingNib = UINib(nibName: "LoadingCell", bundle: nil)
+        questionsDataTable.register(loadingNib, forCellReuseIdentifier: "loadingCell")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +64,7 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 self.allData = [myData]
                 self.arrayCount = self.allData[0].items?.count
+                self.itemsPerBatch += 10
                 
                 // Waits for data to be stored before loading all data
                 DispatchQueue.main.async {
@@ -79,9 +84,21 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     // MARK: - Table view data source
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+        return arrayCount ?? 1
+        } else if section == 1 && fetchingMore {
+            return 1
+        }
+        return 0
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        if indexPath.section == 0 {
         let cell = questionsDataTable.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) as! QuestionsDisplayCell
     
         if arrayCount ?? 1 < 2 {
@@ -89,18 +106,19 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
             return cell
         }
         else {
-            let url = URL(string: (self.allData[0].items?[indexPath.row].owner?.profile_image) ?? "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png")
-            self.cacheImage(imageView: &cell.questionProfilePicture!, url: url!)
-            cell.questionTitle?.text = (self.allData[0].items![indexPath.row].title)
-            cell.questionOwnerName?.text = self.allData[0].items![indexPath.row].owner?.display_name
-            cell.questionNumberOfAnswers?.text = "# of Answers: \(self.allData[0].items![indexPath.row].answer_count ?? -1)"
-            return cell
             
+                let url = URL(string: (self.allData[0].items?[indexPath.row].owner?.profile_image) ?? "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png")
+                self.cacheImage(imageView: &cell.questionProfilePicture!, url: url!)
+                cell.questionTitle?.text = (self.allData[0].items![indexPath.row].title)
+                cell.questionOwnerName?.text = self.allData[0].items![indexPath.row].owner?.display_name
+                cell.questionNumberOfAnswers?.text = "# of Answers: \(self.allData[0].items![indexPath.row].answer_count ?? -1)"
+                return cell
             }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return arrayCount ?? 1
+        } else {
+            let loaderCell = questionsDataTable.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingCell
+            loaderCell.activityIndicator.startAnimating()
+            return loaderCell
+        }
     }
     
     // This allows data to be easily transferable (could use UserDefaults but for a simple task this could be done as well)
@@ -155,7 +173,6 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
 
         if offsetY > contentHeight - scrollView.frame.height {
             if !fetchingMore {
-                print("Fetching More Data")
                 beginBatchFetch()
             }
         }
@@ -163,9 +180,9 @@ class QuestionsController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func beginBatchFetch() {
         fetchingMore = true
-        DispatchQueue.main.async {
-//            self.itemsPerBatch += 10
-//            self.downloadURL()
+        questionsDataTable.reloadSections(IndexSet(integer: 1), with: .none)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.downloadURL()
             self.fetchingMore = false
         }
     }
